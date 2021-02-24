@@ -19,13 +19,6 @@
                     <span>Dashboard</span></a>
             </li>
 
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <form action="" method="post">
-                       <span> <button name="logout" type="submit">Logout</button></span>
-                    </form>
-            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -131,11 +124,4 @@
         </ul>
         <!-- End of Sidebar -->
 
-        <?php
-        
-        if(isset($_POST['logout'])){
-            session_destroy();
-            header("location:login.php");
-        }
-        
-        ?>
+      
