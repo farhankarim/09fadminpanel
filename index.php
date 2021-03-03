@@ -24,6 +24,20 @@
     <input class="form-control" type="number" value="<?php echo $data['price']?>" name="price" id="price">
     <label for="weight">Weight</label>
     <input class="form-control" type="number" value="<?php echo $data['weight']?>" name="weight" id="weight">
+    <label for="category">Category</label>
+            <select name="cat_id" class="form-control" id="cat">
+            <?php
+            $category = "select * from category";
+            $category_data = mysqli_query($con, $category);
+            foreach ($category_data as $row) {
+            ?>
+            <option value="<?php echo $row['cat_id']?>"><?php echo $row['name']?></option>
+            <?php
+              # code...
+            }
+            ?>
+            
+            </select>
     <button name="edit_product" class="mt-4 btn btn-success" type="submit">Update</button>
     <button  class="mt-4 btn btn-warning" data-dismiss="modal">Close</button>
 </form>
@@ -105,6 +119,20 @@ if (isset($_SESSION['create'])) {
             <input class="form-control" type="number" name="price" id="price">
             <label for="weight">Weight</label>
             <input class="form-control" type="number" name="weight" id="weight">
+            <label for="category">Category</label>
+            <select name="cat_id" class="form-control" id="cat">
+            <?php
+            $category = "select * from category";
+            $category_data = mysqli_query($con, $category);
+            foreach ($category_data as $row) {
+            ?>
+            <option value="<?php echo $row['cat_id']?>"><?php echo $row['name']?></option>
+            <?php
+              # code...
+            }
+            ?>
+            
+            </select>
             <button name="create_product" class="mt-4 btn btn-primary" type="submit">Create</button>
     <button  class="mt-4 btn btn-warning" data-dismiss="modal">Close</button>
         </form>
@@ -121,6 +149,7 @@ if (isset($_SESSION['create'])) {
             <th>Brand</th>
             <th>Price</th>
             <th>Weight</th>
+            <th>cat_id</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -130,11 +159,12 @@ if (isset($_SESSION['create'])) {
         foreach ($data as $value) {
         ?>
             <tr>
-                <td ><?php echo $value['id'] ?></td>
+                <td ><?php echo $value['product_id'] ?></td>
                 <td ><?php echo $value['name'] ?></td>
                 <td><?php echo $value['brand'] ?></td>
                 <td><?php echo $value['price'] ?></td>
                 <td><?php echo $value['weight'] ?></td>
+                <td><?php echo $value['cat_id'] ?></td>
                 <td>
                 <form action="index_crud.php" method="get">
                 <button type="button" name="edit_product" class="btn btn-info updateBtn" data-toggle="modal" data-target="#updateModal" >Update</button>

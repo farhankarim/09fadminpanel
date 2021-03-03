@@ -12,7 +12,7 @@ include("includes/navbar.php");
 include("includes/db.php");
 
 //select * from products result saved in $result variable
-$query = "select * from products";
+$query = "SELECT products.*,category.name as cat_name FROM  products INNER JOIN category on products.cat_id=category.cat_id";
 $data = mysqli_query($con, $query);
 echo "<h2>Products</h2><br> No.of products in store are <b>$data->num_rows<b>";
 
@@ -39,17 +39,18 @@ echo "<h2>Products</h2><br> No.of products in store are <b>$data->num_rows<b>";
           <?php
           if(isset($_POST['search'])){
             $search=$_POST['search_box'];
-            $query="select * from products where name like '$search%' ";
-            var_dump($query);
+            $query="SELECT products.*,category.name as cat_name FROM products INNER JOIN category on products.cat_id=category.cat_id where products.name like '$search%'
+            ";
             $data=mysqli_query($con,$query);
           }
           
           
          
           foreach ($data as $row) {
-              # code...
+           
         
           ?>
+          
           <div class="card  mb-4 card-hover">
             <a href="pages/course-single.html" w class="card-img-top"><img src="<?php echo "uploads/".$row["image_path"]?>" alt="" class="rounded-top card-img-top"></a>
             <!-- Card Body -->
@@ -86,7 +87,7 @@ echo "<h2>Products</h2><br> No.of products in store are <b>$data->num_rows<b>";
                   <img src="uploads/Capture.JPG" width="100" class="rounded-circle avatar-xs" alt="">
                 </div>
                 <div class="col ml-2">
-                  <span>Morris Mccoy</span>
+                  <span><?php echo $row["cat_name"]?></span>
                 </div>
                 <div class="col-auto">
                   <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Add to Bookmarks">

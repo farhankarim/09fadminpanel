@@ -33,13 +33,14 @@ if(isset($_POST['create_product'])){
     $brand=$_POST['brand'];
     $price=$_POST['price'];
     $weight=$_POST['weight'];
+    $cat_id=$_POST['cat_id'];
     // get the name of file
     $c_image = $_FILES['image']['name'];
     // get the location of file in chrome temp folder
     $c_image_tmp = $_FILES['image']['tmp_name'];
     // move the file from temp folder to server folder named uploads
     move_uploaded_file($c_image_tmp,"uploads/$c_image");
-  $sql="insert into products(name,brand,price,weight,image_path) values('$name','$brand','$price','$weight','$c_image')";
+  $sql="insert into products(name,brand,price,weight,image_path,cat_id) values('$name','$brand','$price','$weight','$c_image','$cat_id')";
   
   $query=mysqli_query($con,$sql);
   
